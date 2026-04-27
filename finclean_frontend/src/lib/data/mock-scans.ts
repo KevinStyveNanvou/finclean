@@ -1,0 +1,92 @@
+import { Scan } from '../types';
+
+export const mockScans: Scan[] = [
+  {
+    id: 'scan-001',
+    name: 'Production Infrastructure - Weekly Scan',
+    target: '10.0.0.0/24',
+    type: 'deep',
+    status: 'completed',
+    progress: 100,
+    startedAt: '2024-02-15T08:00:00Z',
+    completedAt: '2024-02-15T10:30:00Z',
+    vulnerabilitiesFound: 47,
+    criticalCount: 3,
+    highCount: 8,
+    mediumCount: 15,
+    lowCount: 21
+  },
+  {
+    id: 'scan-002',
+    name: 'API Gateway Security Assessment',
+    target: 'api.finclean.com',
+    type: 'compliance',
+    status: 'completed',
+    progress: 100,
+    startedAt: '2024-02-14T14:00:00Z',
+    completedAt: '2024-02-14T16:45:00Z',
+    vulnerabilitiesFound: 12,
+    criticalCount: 1,
+    highCount: 2,
+    mediumCount: 4,
+    lowCount: 5
+  },
+  {
+    id: 'scan-003',
+    name: 'Quick Scan - New Deploy',
+    target: 'staging.finclean.com',
+    type: 'quick',
+    status: 'running',
+    progress: 67,
+    startedAt: '2024-02-15T15:00:00Z',
+    vulnerabilitiesFound: 5,
+    criticalCount: 0,
+    highCount: 1,
+    mediumCount: 2,
+    lowCount: 2
+  },
+  {
+    id: 'scan-004',
+    name: 'Database Security Audit',
+    target: 'db-cluster-prod.internal',
+    type: 'deep',
+    status: 'completed',
+    progress: 100,
+    startedAt: '2024-02-13T20:00:00Z',
+    completedAt: '2024-02-13T23:15:00Z',
+    vulnerabilitiesFound: 8,
+    criticalCount: 1,
+    highCount: 2,
+    mediumCount: 3,
+    lowCount: 2
+  },
+  {
+    id: 'scan-005',
+    name: 'PCI-DSS Compliance Scan',
+    target: 'payments.finclean.com',
+    type: 'compliance',
+    status: 'completed',
+    progress: 100,
+    startedAt: '2024-02-12T10:00:00Z',
+    completedAt: '2024-02-12T12:30:00Z',
+    vulnerabilitiesFound: 15,
+    criticalCount: 0,
+    highCount: 3,
+    mediumCount: 7,
+    lowCount: 5
+  },
+  {
+    id: 'scan-006',
+    name: 'External Perimeter Scan',
+    target: '*.finclean.com',
+    type: 'deep',
+    status: 'failed',
+    progress: 45,
+    startedAt: '2024-02-11T09:00:00Z',
+    vulnerabilitiesFound: 0,
+    criticalCount: 0,
+    highCount: 0,
+    mediumCount: 0,
+    lowCount: 0
+  }
+];

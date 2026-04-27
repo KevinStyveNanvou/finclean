@@ -1,0 +1,51 @@
+# Core
+Django
+djangorestframework
+
+# Auth
+djangorestframework-simplejwt
+
+# Security / CORS
+django-cors-headers
+django-environ
+
+# Database
+psycopg2-binary
+
+# Cache / Redis
+redis
+django-redis
+
+# Async / Tasks
+celery
+django-celery-beat
+django-celery-results
+
+# HTTP requests (IMPORTANT)
+requests
+
+# Data / AI
+pandas
+numpy
+scikit-learn
+faiss-cpu
+
+# Reporting
+reportlab
+matplotlib
+# Filtering
+django-filter
+
+# Docs
+drf-spectacular
+
+# Server
+gunicorn
+
+
+python-dotenv
+
+channels==4.1.0
+channels-redis==4.2.0
+daphne==4.1.2
+

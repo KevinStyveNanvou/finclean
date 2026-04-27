@@ -1,0 +1,105 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: finclean
+      POSTGRES_USER: finclean
+      POSTGRES_PASSWORD: fincleanpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finclean"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./finclean_backend
+    volumes:
+      - ./finclean_backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings
+      - DB_NAME=finclean
+      - DB_USER=finclean
+      - DB_PASSWORD=fincleanpass
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_URL=redis://redis:6379/0
+      - WATCHFILES_FORCE_POLLING=true      # ← force le polling
+      - WATCHDOG_USE_POLLING=true
+
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery_worker:
+    build: ./finclean_backend
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - ./finclean_backend:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings
+      - DB_NAME=finclean
+      - DB_USER=finclean
+      - DB_PASSWORD=fincleanpass
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery_beat:
+    build: ./finclean_backend
+    command: celery -A config beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - ./finclean_backend:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings
+      - DB_NAME=finclean
+      - DB_USER=finclean
+      - DB_PASSWORD=fincleanpass
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build: ./finclean_frontend
+    volumes:
+      - ./finclean_frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/
+      - WATCHPACK_POLLING=true             # ← hot reload Next.js sur Windows
+      - CHOKIDAR_USEPOLLING=true           # ← fallback chokidar
+      - WDS_SOCKET_PORT=3000
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
