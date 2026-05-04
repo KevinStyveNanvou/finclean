@@ -31,13 +31,6 @@ export default function RegisterPage() {
     username: ''
   });
 
-  useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      router.replace('/dashboard');
-    }
-  }, [router]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
       ...prev,
@@ -107,18 +100,16 @@ export default function RegisterPage() {
           {/* Logo */}
           <div className="mb-8 flex flex-col items-center space-y-2">
             <Link href="/" className="flex items-center space-x-2">
-            <img src="/logo2.png" alt="FinClean Logo"/>
+            <img src="/logo2.png" alt="FinClean Logo" className='btn-shine h-15 w-auto'/>
             </Link>
-            <p className="text-sm text-muted-foreground">
-              Start your free trial today
-            </p>
+            <h1 className="text-2xl font-bold">Create your account</h1>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Create an account</CardTitle>
+    
               <CardDescription>
-                Get started with 14 days free trial. No credit card required.
+                Get started with FinClean and secure your financial infrastructure today.
               </CardDescription>
             </CardHeader>
 

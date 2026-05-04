@@ -103,7 +103,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="mb-8 flex flex-col items-center space-y-2">
           <div className="flex items-center space-x-2">
-            <img src="/logo2.png" alt="FinClean Logo" />
+            <img src="/logo2.png" alt="FinClean Logo" className='btn-shine h-15 w-auto'/>
           </div>
           <p className="text-sm text-muted-foreground">
             Intelligent Vulnerability Management

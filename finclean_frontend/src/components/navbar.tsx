@@ -70,7 +70,7 @@ export function Navbar() {
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 pr-15">
 
         {user ? (<div>
           <DropdownMenu>
@@ -86,7 +86,7 @@ export function Navbar() {
               </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="end" className="w-80">
+            <DropdownMenuContent align="end" className="w-80 bg-white dark:bg-black text-black">
               <DropdownMenuLabel>Notifications</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="flex flex-col items-start p-3">
@@ -128,7 +128,7 @@ export function Navbar() {
                 </div>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className='bg-white dark:bg-black text-black'>
               <DropdownMenuLabel>
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium">{user?.role}</p>
@@ -140,7 +140,7 @@ export function Navbar() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Billing</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout} className="btn btn-outline text-destructive text-warning"> Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout} className="btn btn-outline text-error text-2xl"> Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>)

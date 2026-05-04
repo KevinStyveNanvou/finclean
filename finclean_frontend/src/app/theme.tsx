@@ -41,7 +41,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setIsDark(prev => !prev)}
-      className="absolute top-4 right-2 z-30 border-2 border-secondaryss rounded-3xl p-1"
+      className="absolute top-3/2 right-3/4 z-30 border-2 border-secondaryss rounded-3xl p-1"
     >
       {!isDark ? (
         <Moon className="w-5 h-5 text-primary" />
